@@ -3,6 +3,7 @@ from flask import render_template
 from flask import make_response, abort
 from flask_mail import Mail, Message
 
+
 app = Flask(__name__)
 mail = Mail(app)
 
