@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-</head>
-<body>
-    <div id="nav">
-        <div class="menu"><a href="index">Home Page</a></div>
-        <div class="menu"><a href="about">About us</a></div>
-        <div class="menu"><a href="gallery">Gallery</a></div>
-        <div class="menu"><a href="contact">Contact us</a></div>
-    </div>
-    <div class="footer"></div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home Page</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body>
+        <div id="nav">
+            <div class="menu"><a href="index">Home Page</a></div>
+            <div class="menu"><a href="about">About us</a></div>
+            <div class="menu"><a href="gallery">Gallery</a></div>
+            <div class="menu"><a href="contact">Contact us</a></div>
+        </div>
+        <h1>
+            Witaj {{user}}! Czy chcesz zobaczyć tą brzydką stronę?
+        </h1>
+        <p> Twój e-mail to {{email}} i właśnie trafia do spamu</p>
+        <div class="footer"></div>
+    </body>
 </html>
