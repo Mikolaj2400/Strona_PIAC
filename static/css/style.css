@@ -74,3 +74,25 @@ img:hover{
     justify-content: center;
     flex-wrap:wrap;
 }
+h1{
+    color:white;
+}
+.label{
+    width:30%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.input{
+    margin-left:8%;
+    width:15%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn{
+    margin-left:12%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}

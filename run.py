@@ -1,19 +1,19 @@
 from flask import Flask
 from flask import render_template
 from flask import make_response, abort
-from flask_mail import Mail, Message
+# from flask_mail import Mail, Message
 
 
 app = Flask(__name__)
-mail = Mail(app)
-
-app.config('MAIL_SERVER') = 'smtp.gmail.com'
-app.config('MAIL_PORT') =   465
-app.config('MAIL_USERNAME') = 'yourId@gmail.com'
-app.config('MAIL_PASSWORD') = '*****'
-app.config('MAIL_USE_TLS') = False
-app.config('MAIL_USE_SSL') = True
-mail = Mail(app)
+# mail = Mail(app)
+#
+# app.config('MAIL_SERVER') = 'smtp.gmail.com'
+# app.config('MAIL_PORT') =   465
+# app.config('MAIL_USERNAME') = 'yourId@gmail.com'
+# app.config('MAIL_PASSWORD') = '*****'
+# app.config('MAIL_USE_TLS') = False
+# app.config('MAIL_USE_SSL') = True
+# mail = Mail(app)
 
 @app.route('/error_denied')
 def error_denied():
@@ -36,11 +36,11 @@ def not_found_error(error):
 @app.route("/")
 def home():
     return render_template('index.html'), "sent"
-    msg = Message("Hello", sender = 'yourId@gmail.com', recipients = ['someone1@gmail.com'])
+    # msg = Message("Hello", sender = 'yourId@gmail.com', recipients = ['someone1@gmail.com'])
     msg.body = "Hello Flask message sent from Flask-Mail"
     mail.send(msg)
 
-@app.route('s')
+@app.route('/s/')
 def szablon():
     return render_template('index.html', user="Stan", email="dowolny@email.pl")
 
@@ -59,6 +59,10 @@ def about():
 @app.route("/gallery")
 def gallery():
     return render_template('gallery.html')
+
+@app.route("/menu")
+def menu():
+    return render_template('menu.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
