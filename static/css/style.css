@@ -1,3 +1,13 @@
+* {
+ margin: 0;
+ padding: 0;
+ border: 0;
+ line-height: 1.4em;
+ vertical-align: baseline;
+ text-decoration: none;
+ outline: 0;
+}
+
 body {
     background-image: url('/static/background-image.jpg');
     background-color: #cccccc;

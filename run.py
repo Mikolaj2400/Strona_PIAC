@@ -1,11 +1,12 @@
 from flask import Flask
 from flask import render_template
 from flask import make_response, abort
-# from flask_mail import Mail, Message
-
+#from flask import Mail
+from AzureDB import AzureDB
 
 app = Flask(__name__)
-# mail = Mail(app)
+
+#mail = Mail(app)
 #
 # app.config('MAIL_SERVER') = 'smtp.gmail.com'
 # app.config('MAIL_PORT') =   465
@@ -35,10 +36,15 @@ def not_found_error(error):
 
 @app.route("/")
 def home():
-    return render_template('index.html'), "sent"
-    # msg = Message("Hello", sender = 'yourId@gmail.com', recipients = ['someone1@gmail.com'])
-    msg.body = "Hello Flask message sent from Flask-Mail"
-    mail.send(msg)
+    return render_template('index.html')
+
+
+@app.route('/baza')
+def hello():
+    with AzureDB() as a:
+        data = a.azureGetData()
+    return render_template("result.html", data = data)
+
 
 @app.route('/s/')
 def szablon():
@@ -60,9 +66,7 @@ def about():
 def gallery():
     return render_template('gallery.html')
 
-@app.route("/menu")
-def menu():
-    return render_template('menu.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

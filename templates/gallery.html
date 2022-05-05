@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Gallery</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% set active_page = "index" -%}
+{% block body %}
     <div class="nav">
         <div class="menu"><a href="index">Home Page</a></div>
         <div class="menu"><a href="about">About us</a></div>
@@ -19,5 +14,4 @@
         <div class="image"><img src="/static/img/kobe.jpg"></div>
         <div class="image"><img src="/static/img/wadelj.jpg"></div>
     </div>
-</body>
-</html>
+{% endblock %}
