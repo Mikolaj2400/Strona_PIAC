@@ -2,7 +2,7 @@ from flask import Flask
 from flask import render_template
 from flask import make_response, abort
 #from flask import Mail
-from AzureDB import AzureDB
+#from AzureDB import AzureDB
 
 app = Flask(__name__)
 

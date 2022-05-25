@@ -2,16 +2,39 @@
 {% block title %}Home{% endblock %}
 {% set active_page = "index" -%}
 {% block body %}
-    <div class="nav">
-        <div class="menu"><a href="index">Home Page</a></div>
-        <div class="menu"><a href="about">About us</a></div>
-        <div class="menu"><a href="gallery">Gallery</a></div>
-        <div class="menu"><a href="contact">Contact us</a></div>
-    </div>
-    <div class="gallery">
-        <div class="image"><img src="/static/img/kl.jpg"></div>
-        <div class="image"><img src="/static/img/mj.jpg"></div>
-        <div class="image"><img src="/static/img/kobe.jpg"></div>
-        <div class="image"><img src="/static/img/wadelj.jpg"></div>
+ <div class="gallery">
+        <div class="row">
+            <a href="/static/img/kl.jpg" data-toggle="lightbox">
+                <div class="image col-sm-4 img-fluid" ><img src="/static/img/kl.jpg"></div>
+            </a>
+            <a href="/static/img/mj.jpg" data-toggle="lightbox">
+                <div class="image col-sm-4 img-fluid"><img src="/static/img/mj.jpg"></div>
+            </a>
+            <a href="/static/img/kobe.jpg" data-toggle="lightbox">
+                <div class="image col-sm-4 img-fluid"><img src="/static/img/kobe.jpg"></div>
+            </a>
+        </div>
+        <div class="row">
+            <a href="/static/img/wadelj.jpg" data-toggle="lightbox">
+                <div class="image col-sm-4 img-fluid"><img src="/static/img/wadelj.jpg"></div>
+            </a>
+            <a href="/static/img/bryant.jpg" data-toggle="lightbox">
+                <div class="image col-sm-4 img-fluid"><img src="/static/img/bryant.jpg"></div>
+            </a>
+            <a href="/static/img/jordan.jpg" data-toggle="lightbox">
+                <div class="image col-sm-4 img-fluid"><img src="/static/img/jordan.jpg"></div>
+            </a>
+        </div>
+        <div class="row">
+            <a href="/static/img/curry.jpeg" data-toggle="lightbox">
+                <div class="image col-sm-4 img-fluid"><img src="/static/img/curry.jpeg"></div>
+            </a>
+            <a href="/static/img/morant.jpg" data-toggle="lightbox">
+                <div class="image col-sm-4 img-fluid"><img src="/static/img/morant.jpg"></div>
+            </a>
+            <a href="/static/img/lebron.jpg" data-toggle="lightbox">
+                <div class="image col-sm-4 img-fluid"><img src="/static/img/lebron.jpg"></div>
+            </a>
+        </div>
     </div>
 {% endblock %}
