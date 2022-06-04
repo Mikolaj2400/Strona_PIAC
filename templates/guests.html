@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% set active_page = "index" -%}
+{% block body %}
+    <div class="form">
+        <h1>Lista komentarzy : </h1>
+        <br />
+        {% for result in data %}
+        <p>{{result.name }} napisal {{result.text }} </p>
+        {% else %}
+        <p>Brak wpisów </p>
+    </div>
+{% endfor %}
+{% endblock %}

@@ -1,11 +1,69 @@
-from flask import Flask
+import pypyodbc
+from flask import Flask, redirect, url_for, request
 from flask import render_template
 from flask import make_response, abort
+from flask_dance.contrib.github import make_github_blueprint, github
+import secrets
+import os
 #from flask import Mail
-#from AzureDB import AzureDB
+import azurecred
+from AzureDB import AzureDB
 
 app = Flask(__name__)
+app.secret_key = secrets.token_hex(16)
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+OAUTHLIB_INSECURE_TRANSPORT = 1
+github_blueprint = make_github_blueprint(
+    client_id = "8fc2322c96b258571441",
+    client_secret = "e971030f33d961eea6163cdce85145bc7a826414"
+)
+app.register_blueprint(github_blueprint, url_prefix = '/github_login')
 
+class AzureDB:
+
+
+    dsn = 'DRIVER=' + azurecred.AZDBDRIVER + ';SERVER=tcp:' + azurecred.AZDBSERVER + ';PORT=1433;DATABASE = '+azurecred.AZDBNAME+';UID =w12'+';PWD =Haslo123'
+
+    def __init__(self):
+        self.conn = pypyodbc.connect(self.dsn)
+        self.cursor = self.conn.cursor()
+
+    def finalize(self):
+        if self.conn:
+            self.conn.close()
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.finalize()
+
+    def __enter__(self):
+        return self
+
+    def azureGetData(self):
+        try:
+            self.cursor.execute("SELECT name,text from data")
+            data = self.cursor.fetchall()
+            return data
+        except pypyodbc.DatabaseError as exception:
+            print('Failed to execute query')
+            print(exception)
+            exit(1)
+
+    def azureGetData(self):
+        try:
+            self.cursor.execute("SELECT name, text from data")
+            data = self.cursor.fetchall()
+            return data
+        except pypyodbc.DatabaseError as exception:
+            print('Failed to execute query')
+            print(exception)
+            exit(1)
+
+    def azureAddData(self):
+        # cname: str = request.form.get('cname')
+        # comment: str = request.form.get('comment')
+        self.cursor.execute("""INSERT INTO data (name, text) VALUES (?,?)""",
+                            (request.form.get('cname'), request.form.get('comment')))
+        self.conn.commit()
 #mail = Mail(app)
 #
 # app.config('MAIL_SERVER') = 'smtp.gmail.com'
@@ -38,17 +96,16 @@ def not_found_error(error):
 def home():
     return render_template('index.html')
 
-
-@app.route('/baza')
-def hello():
-    with AzureDB() as a:
-        data = a.azureGetData()
-    return render_template("result.html", data = data)
-
-
-@app.route('/s/')
-def szablon():
-    return render_template('index.html', user="Stan", email="dowolny@email.pl")
+@app.route('/login')
+def github_login():
+    if not github.authorized:
+        return redirect(url_for('github.login'))
+    else:
+        account_info = github.get('/user')
+        if account_info.ok:
+            account_info_json = account_info.json()
+            return render_template('index.html')
+    return '<h1>Request failed!</h1>'
 
 @app.route("/index")
 def homePage():
@@ -65,7 +122,12 @@ def about():
 @app.route("/gallery")
 def gallery():
     return render_template('gallery.html')
-
+@app.route("/guests")
+def guests():
+    # with AzureDB() as a:
+    #     data = a.azureGetData()
+    # return render_template("guests.html", data = data)
+    return render_template('guests.html')
 
 
 if __name__ == '__main__':
