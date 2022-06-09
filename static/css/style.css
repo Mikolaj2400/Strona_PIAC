@@ -7,7 +7,6 @@
  text-decoration: none;
  outline: 0;
 }
-
 body {
     background-image: url('/static/background-image.jpg');
     background-color: #cccccc;
@@ -16,11 +15,10 @@ body {
 }
 a{
     text-decoration: none;
-    color:#8c8c8c;
     font-size:55px;
 }
 a:hover{
-    color:#6c2336;
+    text-decoration: none;
 }
 #nav{
     font-size:25px;
@@ -37,21 +35,6 @@ a:hover{
     display:flex;
     align-items: center;
     justify-content: center;
-}
-.menu{
-    padding-top:10px;
-    padding-bottom:10px;
-    width:24%;
-    float:left;
-    border:1.75px solid black;
-    text-align:center;
-    color:#163f5d;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-}
-.footer{
-    clear:both;
 }
 img{
     width:  350px;
@@ -95,14 +78,7 @@ img{
 h1{
     color:white;
 }
-.label{
-    width:35%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-}
 .input{
-    margin-left:8%;
     width:20%;
     display:flex;
     align-items: center;
@@ -110,7 +86,7 @@ h1{
 }
 #btn{
     margin-top: 2%;
-    margin-left:12%;
+    width:20%;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -119,9 +95,15 @@ h1{
     padding:1%;
 }
 .form{
-    margin-left:40%;
+    margin-left:45%;
     margin-top:15%;
     color:white;
+}
+.about{
+    margin:auto;
+    text-align:center;
+    color:white;
+    text-decoration:none;
 }
 .navbarcssul{
     display:flex;
@@ -137,4 +119,14 @@ h1{
 }
 .navbarcss:last-child{
     border: none;
+}
+.json{
+    color:white;
+    font-size: 25px;
+}
+.weather{
+    margin:auto;
+    margin-top:15%;
+    text-align:center;
+    color:white;
 }

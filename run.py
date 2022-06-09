@@ -1,12 +1,12 @@
 import pypyodbc
-from flask import Flask, redirect, url_for, request
+from flask import Flask, redirect, url_for, request, json
 from flask import render_template
 from flask import make_response, abort
 from flask_dance.contrib.github import make_github_blueprint, github
 import secrets
 import os
-#from flask import Mail
 import azurecred
+import requests
 from AzureDB import AzureDB
 
 app = Flask(__name__)
@@ -18,6 +18,20 @@ github_blueprint = make_github_blueprint(
     client_secret = "e971030f33d961eea6163cdce85145bc7a826414"
 )
 app.register_blueprint(github_blueprint, url_prefix = '/github_login')
+
+def format_response(city):
+    weather_key ='9114b0e3bbba5d06f8a8937d45b1e5c9'
+    url = "https://api.openweathermap.org/data/2.5/weather"
+    params = {"APPID": weather_key, "q": city, "units": "Metric"}
+    response = requests.get(url, params = params)
+    weather = response.json()
+    name = weather['name']
+    temp = weather['main']['temp']
+    hum = weather['main']['humidity']
+    pressure = weather['main']['pressure']
+    wind = weather['wind']['speed']
+    clouds = weather['clouds']['all']
+    return "%s Temperature: %s°C Humidity: %s  Wind Speed: %s m/s  Pressure: %s hPa Cloudiness: %s"  %(name, temp, hum, wind, pressure, clouds)
 
 class AzureDB:
 
@@ -64,15 +78,6 @@ class AzureDB:
         self.cursor.execute("""INSERT INTO data (name, text) VALUES (?,?)""",
                             (request.form.get('cname'), request.form.get('comment')))
         self.conn.commit()
-#mail = Mail(app)
-#
-# app.config('MAIL_SERVER') = 'smtp.gmail.com'
-# app.config('MAIL_PORT') =   465
-# app.config('MAIL_USERNAME') = 'yourId@gmail.com'
-# app.config('MAIL_PASSWORD') = '*****'
-# app.config('MAIL_USE_TLS') = False
-# app.config('MAIL_USE_SSL') = True
-# mail = Mail(app)
 
 @app.route('/error_denied')
 def error_denied():
@@ -122,6 +127,22 @@ def about():
 @app.route("/gallery")
 def gallery():
     return render_template('gallery.html')
+
+@app.route("/weather", methods = ['POST', 'GET'])
+def weather():
+    if request.method =='GET':
+        return render_template('weather.html')
+    if request.method == "POST":
+        try:
+            city = request.form['city']
+            weather_data = format_response(city)
+        except ValueError:
+            return render_template("404.html")
+        else:
+            return render_template("weather.html", data = weather_data)
+    return render_template('weather.html')
+
+
 @app.route("/guests")
 def guests():
     # with AzureDB() as a:

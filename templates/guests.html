@@ -3,12 +3,12 @@
 {% set active_page = "index" -%}
 {% block body %}
     <div class="form">
-        <h1>Lista komentarzy : </h1>
+        <h1>Comments : </h1>
         <br />
         {% for result in data %}
-        <p>{{result.name }} napisal {{result.text }} </p>
+        <p>{{result.name }} wrote {{result.text }} </p>
         {% else %}
-        <p>Brak wpisów </p>
+        <p>There are no comments yet</p>
     </div>
 {% endfor %}
 {% endblock %}

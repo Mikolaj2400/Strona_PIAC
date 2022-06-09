@@ -1,0 +1,30 @@
+{"songs": [
+  {
+      "id": 1,
+      "album_name": "The Off-Season",
+      "artist": "J.Cole",
+      "song": "interlude",
+      "production_year": 2021
+  },
+  {
+        "id": 2,
+        "album_name": "The Off-Season",
+        "artist": "J.Cole",
+        "song": "pride.is.the.devil",
+        "production_year": 2021
+  },
+  {
+        "id": 3,
+        "album_name": "The Off-Season",
+        "artist": "J.Cole",
+        "song": "amari",
+        "production_year": 2021
+  },
+  {
+        "id": 4,
+        "album_name": "The Off-Season",
+        "artist": "J.Cole",
+        "song": "my.life",
+        "production_year": 2021
+  }
+]}
